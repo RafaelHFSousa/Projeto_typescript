@@ -1,0 +1,10 @@
+# @name post_alunos
+POST http://localhost:3333/alunos
+Content-Type: application/json
+
+{
+  "matricula": "2222",
+  "nome": "Rafael",
+  "idade": 21,
+  "curso": "python"
+}
