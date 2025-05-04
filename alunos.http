@@ -3,8 +3,24 @@ POST http://localhost:3333/alunos
 Content-Type: application/json
 
 {
-  "matricula": "2222",
+  "matricula": "21312",
   "nome": "Rafael",
   "idade": 21,
   "curso": "python"
 }
+
+####
+
+# @name get_alunos
+GET http://localhost:3333/alunos
+
+####
+
+# @name /alunos/matricula
+GET http://localhost:3333/alunos/1111
+
+####
+
+# @name delete
+DELETE  http://localhost:3333/alunos/2222
+

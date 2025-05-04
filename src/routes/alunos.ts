@@ -19,4 +19,38 @@ export async function alunoRoutes(app: FastifyInstance) {
 
     return reply.status(200).send(aluno);
   });
+  
+  app.get("/alunos", async (request: FastifyRequest, reply: FastifyReply) => {
+    const alunos = await prisma.aluno.findMany();
+    return alunos;
+  });
+
+  app.get('/alunos/:matricula', async (request: FastifyRequest, reply: FastifyReply) => {
+    const {matricula} = request.params as {matricula: string}
+    const aluno = await prisma.aluno.findUnique({
+      where: { matricula }
+    })
+
+    if (!aluno) {
+      return reply.status(404).send({"erro": "não encontrado"})
+    }
+    return aluno
+  })
+
+  app.delete('/alunos/:matricula', async (request: FastifyRequest, reply: FastifyReply) => {
+    const {matricula} = request.params as {matricula: string}
+    const aluno = await prisma.aluno.findUnique({
+      where: { matricula }
+    })
+
+    if (!aluno) {
+      return reply.status(404).send({"erro": "não encontrado"})
+    }
+
+    await prisma.aluno.delete({
+      where: { matricula }
+    })
+
+    return reply.status(204).send() 
+  })
 }
